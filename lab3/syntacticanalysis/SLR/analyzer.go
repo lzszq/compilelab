@@ -61,7 +61,8 @@ func Analyzer(keys, tmps []string) bool {
 		} else if action.Left == "r" {
 			g := GramTable[action.Right]
 			parent = utils.InitNode(g.Left)
-			for g.Right != 0 {
+			t := g.Right
+			for t != 0 {
 				reduce := symbolStack.Top().(string)
 				symbolStack.Pop()
 				stateStack.Pop()
@@ -75,7 +76,7 @@ func Analyzer(keys, tmps []string) bool {
 					parent.Add(top)
 					top.Parent = parent
 				}
-				g.Right -= 1
+				t -= 1
 			}
 			top = parent
 			treeStack.Push(top)
